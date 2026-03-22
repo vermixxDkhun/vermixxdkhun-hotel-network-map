@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import logoNight from "./assets/logo2.png";
 import logoDay from "./assets/logo3.png";
+import B1cc from "./assets/b1-cc.jpg";
+
+
+
+
 
 const buildingOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "MAIN"];
 
@@ -271,7 +276,55 @@ const themes = {
   },
 };
 
+function ImageModal({ title, image, onClose, theme }) {
+  const [zoom, setZoom] = useState(1);
+
+  return (
+    <div style={{ ...styles.overlay, background: theme.overlay }} onClick={onClose}>
+      <div
+        style={{
+          ...styles.modal,
+          background: theme.modalBg,
+          maxWidth: "800px",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 style={{ color: theme.modalTitle, marginBottom: "12px" }}>{title}</h2>
+
+        <div style={{ overflow: "hidden", borderRadius: "12px" }}>
+          <img
+            src={image}
+            alt={title}
+            style={{
+              width: "100%",
+              transform: `scale(${zoom})`,
+              transition: "transform 0.3s ease",
+              cursor: "zoom-in",
+            }}
+            onClick={() => setZoom(zoom === 1 ? 2 : 1)}
+          />
+        </div>
+
+        <p style={{ marginTop: "10px", fontSize: "12px", color: theme.muted }}>
+          Click image to zoom
+        </p>
+
+        <button
+          style={{
+            ...styles.darkButton,
+            background: theme.accentStrong,
+            marginTop: "16px",
+          }}
+          onClick={onClose}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
 function InfoModal({ title, text, onClose, theme }) {
+  
   return (
     <div style={{ ...styles.overlay, background: theme.overlay }} onClick={onClose}>
       <div style={{ ...styles.modal, background: theme.modalBg }} onClick={(e) => e.stopPropagation()}>
@@ -548,7 +601,8 @@ function BuildingPage({
   onJumpToBuilding,
   mode,
   theme,
-}) {
+  onOpenImage, // ✅ ADD THIS
+})  {
   const building = buildingData[buildingId];
   const logoSrc = mode === "day" ? logoDay : logoNight;
   
@@ -709,6 +763,38 @@ function BuildingPage({
                 </div>
 
                 <div style={styles.floorBody}>
+                <div style={{ marginTop: "12px", display: "flex", gap: "10px" }}>
+  <button
+    style={{
+      ...styles.navButton,
+      marginBottom: "10px", 
+      marginRight: "8px",
+      
+      background: theme.accentStrong,
+      color: "#fff",
+    }}
+    onClick={() =>
+      onOpenImage(`${building.title} - ${item.floor} CCTV`, B1cc)
+    }
+  >
+    CCTV
+  </button>
+
+  <button
+    style={{
+      ...styles.navButton,
+      marginBottom: "10px", 
+      marginRight: "8px",
+      background: theme.accentStrong,
+      color: "#fff",
+    }}
+    onClick={() =>
+      onOpenImage(`${building.title} - ${item.floor} CCTV`, B1cc)
+    }
+  >
+    TV
+  </button>
+</div>
                   <div style={styles.infoGrid}>
                     <div
                       style={{
@@ -864,6 +950,11 @@ function BuildingPage({
 }
 
 export default function App() {
+  const [imageModal, setImageModal] = useState(null);
+
+  const handleOpenImage = (title, image) => {
+    setImageModal({ title, image });
+  };
   useEffect(() => {
     document.body.style.margin = "0";
     document.body.style.padding = "0";
@@ -905,6 +996,7 @@ export default function App() {
     };
   }, []);
 
+
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const [modal, setModal] = useState(null);
   const [mode, setMode] = useState("night");
@@ -937,6 +1029,7 @@ export default function App() {
         />
       ) : (
         <BuildingPage
+        
           buildingId={selectedBuilding}
           onBack={() => setSelectedBuilding(null)}
           onPrev={buildingNav.prevId ? () => setSelectedBuilding(buildingNav.prevId) : null}
@@ -947,6 +1040,7 @@ export default function App() {
           mode={mode}
           onToggleTheme={() => setMode((prev) => (prev === "night" ? "day" : "night"))}
           theme={theme}
+          onOpenImage={handleOpenImage}
         />
       )}
 
@@ -958,9 +1052,18 @@ export default function App() {
           theme={theme}
         />
       )}
+      {imageModal && (
+      <ImageModal
+        title={imageModal.title}
+        image={imageModal.image}
+        onClose={() => setImageModal(null)}
+        theme={theme}
+      />
+    )}
     </>
   );
 }
+
 
 const styles = {
   leftActions: {
