@@ -1,11 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import logoNight from "./assets/logo2.png";
 import logoDay from "./assets/logo3.png";
-import B1cc from "./assets/b1-cc.jpg";
-
-
-
-
 
 const buildingOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "MAIN"];
 
@@ -186,12 +181,113 @@ const buildingData = {
     gateway: "10.10.0.1",
     notes: ["Main server is from IT Office (Service Building)", "1 switch per floor"],
     ipRanges: [
+      { floor: "Floor 1", range: "10.10.14.1-XX" },
+      { floor: "Floor 2", range: "10.10.14.1-XX" },
       { floor: "Floor 3", range: "10.10.13.1-XX", note: "CCTV server is located at this floor." },
       { floor: "Floor 4", range: "10.10.14.1-XX" },
       { floor: "Floor 5", range: "10.10.15.1-XX", note: "WiFi server is located at this floor." },
     ],
   },
 };
+
+const buildingImages = {
+  "1": {
+    "Floor 1": { tv: "/image/cctv/b1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b1f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b1f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b1f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "2": {
+    "Floor 1": { tv: "/image/cctv/b2f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b2f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b2f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b2f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "3": {
+    "Floor 1": { tv: "/image/cctv/b3f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b3f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b3f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b3f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "4": {
+    "Floor 1": { tv: "/image/cctv/b4f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b4f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b4f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b4f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "5": {
+    "Floor 1": { tv: "/image/cctv/b5f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b5f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b5f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b5f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "6": {
+    "Floor 1": { tv: "/image/cctv/b6f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b6f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b6f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b6f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "7": {
+    "Floor 1": { tv: "/image/cctv/b7f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b7f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b7f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b7f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "8": {
+    "Floor 1": { tv: "/image/cctv/b8f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b8f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b8f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b8f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+  "9": {
+    "Floor 1": { tv: "/image/cctv/b9f1.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 2": { tv: "/image/cctv/b9f2.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 3": { tv: "/image/cctv/b9f3.jpg", cctv: "/image/tv/b1f11.jpg" },
+    "Floor 4": { tv: "/image/cctv/b9f4.jpg", cctv: "/image/tv/b1f11.jpg" },
+  },
+
+      "A": {
+        "Floor 1": { tv: "/image/cctv/baf1.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 2": { tv: "/image/cctv/baf2.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 3": { tv: "/image/cctv/baf3.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 4": { tv: "/image/cctv/baf4.jpg", cctv: "/image/tv/b3.jpg" },
+      },
+      "B": {
+        "Floor 1": { tv: "/image/cctv/bbf1.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 2": { tv: "/image/cctv/bbf2.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 3": { tv: "/image/cctv/bbf3.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 4": { tv: "/image/cctv/bbf4.jpg", cctv: "/image/tv/b2.jpg" },
+      },
+      
+      "C": {
+        "Floor 1": { tv: "/image/cctv/bcf1.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 2": { tv: "/image/cctv/bcf2.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 3": { tv: "/image/cctv/bcf3.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 4": { tv: "/image/cctv/bcf4.jpg", cctv: "/image/tv/b2.jpg" },
+      },
+      
+      "D": {
+        "Floor 1": { tv: "/image/cctv/bdf1.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 2": { tv: "/image/cctv/bdf2.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 3": { tv: "/image/cctv/bdf3.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 4": { tv: "/image/cctv/bdf4.jpg", cctv: "/image/tv/b2.jpg" },
+        "Floor 5": { tv: "/image/cctv/bdf5.jpg", cctv: "/image/tv/b2.jpg" },
+      },
+      "E": {
+        "Floor 1": {  cctv: "/image/tv/b4.jpg" },
+        "Floor 2": { tv: "/image/cctv/bef2.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 3": { tv: "/image/cctv/bef3.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 4": { tv: "/image/cctv/bef4.jpg", cctv: "/image/tv/b3.jpg" },
+        "Floor 5": { tv: "/image/cctv/bef5.jpg", cctv: "/image/tv/b3.jpg" },
+      },
+      "MAIN": {
+        "Floor 1": { cctv: "/image/tv/bmainf11.jpg" }, 
+        "Floor 2": { cctv: "/image/tv/bmainf22.jpg" },
+        "Floor 3": { tv: "/image/cctv/bmainf3.jpg", cctv: "/image/tv/bmainf33.jpg" },
+        "Floor 4": { tv: "/image/cctv/bmainf4.jpg", cctv: "/image/tv/bmainf44.jpg" },
+        "Floor 5": { tv: "/image/cctv/bmainf5.jpg", cctv: "/image/tv/bmainf55.jpg" },
+      },
+    };
 
 const columns = [
   {
@@ -428,7 +524,9 @@ function HomePage({ onOpenBuilding, onOpenInfo, mode, onToggleTheme, theme }) {
           </div>
 
           <div style={{ ...styles.headerRightText, color: theme.muted }}>
-            Select a building to view IP allocation, gateway settings, and floor-based notes.
+            Select a building to view IP allocation, gateway settings, and floor-based notes.   
+                   <p >Powered by Khun Min Khant Zaw</p>
+                  
           </div>
         </header>
 
@@ -601,7 +699,7 @@ function BuildingPage({
   onJumpToBuilding,
   mode,
   theme,
-  onOpenImage, // ✅ ADD THIS
+  onOpenImage, 
 })  {
   const building = buildingData[buildingId];
   const logoSrc = mode === "day" ? logoDay : logoNight;
@@ -773,13 +871,16 @@ function BuildingPage({
       background: theme.accentStrong,
       color: "#fff",
     }}
-    onClick={() =>
-      onOpenImage(`${building.title} - ${item.floor} CCTV`, B1cc)
+    onClick={() => {
+      const img = buildingImages[buildingId]?.[item.floor];
+      onOpenImage(`${building.title} - ${item.floor} CCTV`, img?.cctv);
     }
+  }
   >
     CCTV
   </button>
 
+  {buildingImages[buildingId]?.[item.floor]?.tv && (
   <button
     style={{
       ...styles.navButton,
@@ -788,12 +889,14 @@ function BuildingPage({
       background: theme.accentStrong,
       color: "#fff",
     }}
-    onClick={() =>
-      onOpenImage(`${building.title} - ${item.floor} CCTV`, B1cc)
-    }
+    onClick={() => {
+      const img = buildingImages[buildingId]?.[item.floor];
+      onOpenImage(`${building.title} - ${item.floor} TV`, img?.tv);
+    }}
   >
     TV
   </button>
+)}
 </div>
                   <div style={styles.infoGrid}>
                     <div
