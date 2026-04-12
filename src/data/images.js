@@ -86,7 +86,7 @@ export const buildingImages = {
       "Floor 5": { tv: "/image/cctv/bef5.jpg",  cctv: "/image/tv/b3.jpg" },
     },
     "MAIN": {
-      "Floor 1": {                                cctv: "/image/cctv/bmainf11.jpg" },
+      "Floor 1": {                                cctv: "/image/tv/bmainf11.jpg" },
       "Floor 2": {                                cctv: "/image/tv/bmainf22.jpg"   },
       "Floor 3": { tv: "/image/cctv/bmainf3.jpg", cctv: "/image/tv/bmainf33.jpg"  },
       "Floor 4": { tv: "/image/cctv/bmainf4.jpg", cctv: "/image/tv/bmainf44.jpg"  },

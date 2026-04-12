@@ -172,13 +172,14 @@ export const buildingData = {
     ],
   },
   MAIN: {
+    
     title: "Main Building",
     subnet: "255.255.255.128",
     gateway: "10.10.0.1",
     notes: ["Main server is from IT Office (Service Building)", "1 switch per floor"],
     ipRanges: [
-      { floor: "Floor 1", range: "10.10.14.1-XX" },
-      { floor: "Floor 2", range: "10.10.14.1-XX" },
+      { floor: "Floor 1",  },
+      { floor: "Floor 2",  },
       { floor: "Floor 3", range: "10.10.13.1-XX", note: "CCTV server is located at this floor." },
       { floor: "Floor 4", range: "10.10.14.1-XX" },
       { floor: "Floor 5", range: "10.10.15.1-XX", note: "WiFi server is located at this floor." },
